@@ -21,15 +21,15 @@ const ContactForm = () => {
   const [errors, setErrors] = useState(errorData);
 
   const errorHandling = (fieldName, fieldValue) => {
+    if (fieldName !== "message" && fieldValue === "")
+      return `${fieldName} is a required field.`;
+
     if (fieldName === "firstName" && fieldValue.length < 5)
       return `${fieldName} must have at least 5 characters.`;
 
     const emailRegex = /(.*)@(.*)\.(.+)/g;
     if (fieldName === "email" && !fieldValue.match(emailRegex))
-      return `${fieldName} must be a valid email address.`;
-
-    if (fieldName !== "message" && fieldValue === "")
-      return `${fieldName} is a required field.`;
+      return `${fieldName} must be a valid email address.`;    
     
     return "";
   }
